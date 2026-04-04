@@ -1,0 +1,90 @@
+.container {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.timeline {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 200px;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.entry {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  height: 100%;
+}
+
+.dateSide {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.nodeSide {
+  flex: 1;
+  width: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.node {
+  width: 100%;
+  border-radius: 10px;
+  transition: height 1s ease-out;
+}
+
+.stress { background: var(--danger); box-shadow: 0 0 10px var(--danger); }
+.burnout { background: var(--warning); box-shadow: 0 0 10px var(--warning); }
+.anxiety { background: var(--primary); box-shadow: 0 0 10px var(--primary); }
+.calm { background: var(--success); box-shadow: 0 0 10px var(--success); }
+.neutral { background: var(--secondary); box-shadow: 0 0 10px var(--secondary); }
+
+.infoSide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.moodLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.signalLabel {
+  font-size: 0.7rem;
+  color: #666;
+}
+
+.footer {
+  margin-top: 1rem;
+}
+
+.insight {
+  font-size: 0.9rem;
+  color: #999;
+  line-height: 1.4;
+}
+
+.insight strong {
+  color: var(--success);
+}

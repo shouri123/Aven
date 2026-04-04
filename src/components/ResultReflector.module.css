@@ -1,0 +1,237 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  background: var(--surface-card);
+  font-family: var(--font-manrope);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--secondary);
+}
+
+.pulse {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-green);
+  border-radius: 50%;
+  position: relative;
+}
+
+.pulse::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  opacity: 0.4;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.4; }
+  70% { transform: scale(2.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+.closeButton {
+  background: var(--background-soft);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closeButton:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  transform: rotate(90deg);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+}
+
+.sectionTitle {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.reflectionText {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #333;
+}
+
+.crisisText {
+  color: #dc2626 !important;
+  font-weight: 600;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--accent-green), transparent);
+  opacity: 0.3;
+}
+
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.signalTag {
+  background: var(--background-soft);
+  color: var(--primary);
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid rgba(22, 53, 38, 0.05);
+}
+
+.recommendationList {
+  list-style: none;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.recommendationItem {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  padding: 1.5rem;
+  background: #fbfbfc;
+  border-radius: 24px;
+  border: 1px solid rgba(0,0,0,0.03);
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.5;
+  transition: 0.3s;
+}
+
+.recommendationItem:hover {
+  background: white;
+  border-color: var(--accent-green);
+  transform: translateX(5px);
+}
+
+.checkIcon {
+  color: var(--accent-green);
+  font-size: 1.5rem;
+}
+
+.crisisAlert {
+  background: #fef2f2;
+  border: 1px solid #fee2e2;
+  padding: 2rem;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.alertHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #dc2626;
+}
+
+.alertHeader span { font-size: 2rem; }
+
+.hotlineGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.hotlineLink {
+  background: white;
+  color: #dc2626;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  border-radius: 20px;
+  text-decoration: none;
+  border: 1px solid #fee2e2;
+  transition: 0.3s;
+}
+
+.hotlineLink:hover {
+  background: #dc2626;
+  color: white;
+  transform: translateY(-3px);
+}
+
+.hotlineLink span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.hotlineLink strong {
+  font-size: 1.25rem;
+  font-family: var(--font-inter);
+}
+
+.doneButton {
+  margin-top: 1rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 1.25rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.3s;
+}
+
+.doneButton:hover {
+  background: #0d2118;
+  transform: scale(0.98);
+}
+
+@media (max-width: 640px) {
+  .container { padding: 1.5rem; }
+  .hotlineGrid { grid-template-columns: 1fr; }
+  .reflectionText { font-size: 1.1rem; }
+}
