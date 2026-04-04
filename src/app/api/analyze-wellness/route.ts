@@ -14,7 +14,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         sentiment: 'neutral',
         detectedSignals: ['system'],
-        reflection: "Aura is in bridge mode. Configure your API key to enable deep reflection.",
+        reflection: "Aven is in bridge mode. Configure your API key to enable deep reflection.",
         recommendations: ["Configure OpenAI API Key", "Check .env.local"],
         severity: 1,
         isCrisis: false
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
       : "";
 
     const prompt = `
-You are the Emotional Intelligence engine of "Aura," a proactive mental wellness AI agent.
+You are the Emotional Intelligence engine of "Aven," a proactive mental wellness AI agent.
 ${contextBlock}
 Analyze the following NEW entry from the user: "${text}"
 

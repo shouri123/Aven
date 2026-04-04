@@ -23,14 +23,14 @@ interface Entry { id: number; text: string; timestamp: string; emotion?: EntryEm
 interface ChatMessage { role: 'user' | 'ai' | 'system'; text: string; emotion?: EntryEmotion; timestamp: string; }
 
 // ===== STORAGE HELPERS =====
-function getUsers(): UserData[] { return JSON.parse(localStorage.getItem('aura_users') || '[]'); }
-function setUsers(u: UserData[]) { localStorage.setItem('aura_users', JSON.stringify(u)); }
-function getSession(): Session | null { const s = localStorage.getItem('aura_session'); return s ? JSON.parse(s) : null; }
-function setSession(s: Session | null) { s ? localStorage.setItem('aura_session', JSON.stringify(s)) : localStorage.removeItem('aura_session'); }
-function getEntries(uid: string): Entry[] { return JSON.parse(localStorage.getItem(`aura_entries_${uid}`) || '[]'); }
-function setEntries(uid: string, e: Entry[]) { localStorage.setItem(`aura_entries_${uid}`, JSON.stringify(e)); }
-function getMessages(uid: string): ChatMessage[] { return JSON.parse(localStorage.getItem(`aura_messages_${uid}`) || '[]'); }
-function setMessages(uid: string, m: ChatMessage[]) { localStorage.setItem(`aura_messages_${uid}`, JSON.stringify(m)); }
+function getUsers(): UserData[] { return JSON.parse(localStorage.getItem('aven_users') || '[]'); }
+function setUsers(u: UserData[]) { localStorage.setItem('aven_users', JSON.stringify(u)); }
+function getSession(): Session | null { const s = localStorage.getItem('aven_session'); return s ? JSON.parse(s) : null; }
+function setSession(s: Session | null) { s ? localStorage.setItem('aven_session', JSON.stringify(s)) : localStorage.removeItem('aven_session'); }
+function getEntries(uid: string): Entry[] { return JSON.parse(localStorage.getItem(`aven_entries_${uid}`) || '[]'); }
+function setEntries(uid: string, e: Entry[]) { localStorage.setItem(`aven_entries_${uid}`, JSON.stringify(e)); }
+function getMessages(uid: string): ChatMessage[] { return JSON.parse(localStorage.getItem(`aven_messages_${uid}`) || '[]'); }
+function setMessages(uid: string, m: ChatMessage[]) { localStorage.setItem(`aven_messages_${uid}`, JSON.stringify(m)); }
 
 function getUnlocks(count: number) {
   return { insights: count >= 3, dashboard: count >= 5, medical: count >= 7 };
@@ -71,7 +71,7 @@ function WelcomeScreen({ onSignUp, onSignIn }: { onSignUp: () => void; onSignIn:
           <div className="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr from-[#10b981] to-[#059669] flex items-center justify-center shadow-xl shadow-[#10b981]/30 mb-6">
             <Leaf size={36} className="text-white" />
           </div>
-          <h1 className="text-5xl font-light tracking-tight text-[#163526] font-[var(--font-outfit)] mb-3">Aura.</h1>
+          <h1 className="text-5xl font-light tracking-tight text-[#163526] font-[var(--font-outfit)] mb-3">Aven.</h1>
           <p className="text-[#446a74] text-lg leading-relaxed">Your AI wellness companion that<br /><span className="text-[#10b981] font-semibold">listens, learns, and evolves</span> with you.</p>
         </div>
         <div className="space-y-3 mt-10">
@@ -213,7 +213,7 @@ function MainApp({ session, onLogout }: { session: Session; onLogout: () => void
       {/* Mobile header */}
       <div className="md:hidden fixed top-0 w-full z-50 bg-[#fbf9f5]/80 backdrop-blur-xl border-b border-[#10b981]/10 px-4 h-14 flex items-center justify-between">
         <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-2 hover:bg-[#10b981]/10 rounded-xl"><Menu size={22} className="text-[#163526]" /></button>
-        <span className="font-bold text-[#163526] flex items-center gap-2"><Leaf size={16} className="text-[#10b981]" /> Aura.</span>
+        <span className="font-bold text-[#163526] flex items-center gap-2"><Leaf size={16} className="text-[#10b981]" /> Aven.</span>
         <div className="w-8" />
       </div>
 
@@ -225,7 +225,7 @@ function MainApp({ session, onLogout }: { session: Session; onLogout: () => void
         <div className="p-6 border-b border-[#10b981]/10">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-gradient-to-tr from-[#10b981] to-[#059669] rounded-xl"><Leaf size={20} className="text-white" /></div>
-            <span className="text-xl font-bold tracking-tight text-[#163526]">Aura.</span>
+            <span className="text-xl font-bold tracking-tight text-[#163526]">Aven.</span>
           </div>
           <p className="text-[10px] text-[#446a74] mt-2 tracking-widest uppercase font-bold">AI Wellness Agent</p>
         </div>

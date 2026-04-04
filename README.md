@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aven | AI Mental Wellness Agent
 
-## Getting Started
+Aven is a minimalist, chat-first mental wellness companion designed to provide a quiet, observant, and progressively intelligent space for self-reflection.
 
-First, run the development server:
+## 🧠 Core Philosophy
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Unlike traditional wellness trackers, Aven doesn't start with dashboards or questionnaires. It begins with a simple conversation. As you share your thoughts, Aven's AI engine (powered by GPT-4o-mini) listens, learns, and slowly unlocks deeper insights, medical guidance, and data visualizations.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Agentic UX**: A quiet observer that comes alive based on interaction.
+- **Progressive Disclosure**:
+  - **3 Entries**: Unlocks AI-driven Emotional Insights.
+  - **5 Entries**: Unlocks the Wellness Dashboard.
+  - **7 Entries**: Unlocks Deep Medical Guidance.
+- **Local-First Security**: Self-contained authentication and data storage in `localStorage`.
+- **Premium Design**: Built with Tailwind CSS v4, featuring glassmorphism and smooth micro-animations.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Technology Stack
 
-## Learn More
+- **Framework**: Next.js 15+ (App Router)
+- **AI**: OpenAI API
+- **Styling**: Tailwind CSS v4
+- **Icons**: Lucide React
+- **Storage**: Browser LocalStorage (UserID isolated)
 
-To learn more about Next.js, take a look at the following resources:
+## 🏗️ Getting Started
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/shouri123/AURA.git aven-wellness
+   cd aven-wellness
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. **Configure Environment**:
+   Create a `.env.local` file:
+   ```env
+   OPENAI_API_KEY=your_key_here
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Run Development Server**:
+   ```bash
+   npm run dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. **Open Browser**:
+   Visit [http://localhost:3000](http://localhost:3000)
+
+## 🔒 Security & Privacy
+
+Aven is designed with privacy in mind. All entries are stored locally in your browser. Authentication is handled using SHA-256 password hashing on the client side.
+
+---
+*Aven — Evolving with your mind.*

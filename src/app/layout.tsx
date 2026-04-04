@@ -18,7 +18,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Aura | AI Mental Wellness Triage",
+  title: "Aven | AI Mental Wellness Triage",
   description: "Detecting emotional signals from natural organic text.",
 };
 
