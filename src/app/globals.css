@@ -261,3 +261,49 @@ body {
   0%, 100% { transform: scale(1); opacity: 0.3; }
   50% { transform: scale(1.05); opacity: 0.6; }
 }
+
+/* ===== CRISIS BANNER ===== */
+.crisis-banner {
+  animation: fadeDown 0.5s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.crisis-critical {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border: 1.5px solid #fca5a5;
+  box-shadow: 0 8px 24px -4px rgba(220,38,38,0.15);
+}
+.crisis-alert {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 1.5px solid #fcd34d;
+  box-shadow: 0 8px 24px -4px rgba(245,158,11,0.15);
+}
+
+/* ===== PROACTIVE MESSAGES ===== */
+.proactive-bubble {
+  background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0.04) 100%);
+  border: 1.5px dashed rgba(16,185,129,0.3);
+  border-radius: 1.5rem;
+  padding: 1rem 1.5rem;
+  animation: fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+/* ===== PATTERN BADGES ===== */
+.pattern-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  border: 1.5px solid;
+  transition: all 0.3s;
+}
+.pattern-badge:hover { transform: translateY(-1px); }
+.pattern-high { background: #fef2f2; border-color: #fca5a5; color: #991b1b; }
+.pattern-moderate { background: #fffbeb; border-color: #fcd34d; color: #92400e; }
+.pattern-low { background: #f0fdf4; border-color: #86efac; color: #166534; }
+
+/* ===== REASONING PANEL ===== */
+.reasoning-panel {
+  font-size: 0.8rem;
+  border-left: 3px solid #10b981;
+}
+
