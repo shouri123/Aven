@@ -80,7 +80,7 @@ Respond with ONLY a JSON object:
 }`;
 
     const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: `${userName} says: "${text}"` }
@@ -107,21 +107,21 @@ Respond with ONLY a JSON object:
       wellnessGuidance: parsed.wellnessGuidance || [],
     });
 
-  } catch (error: unknown) {
+  } catch (error: any) {
     console.error('AI Analysis Error:', error);
     const isCrisis = text.toLowerCase().includes('give up') || text.toLowerCase().includes('end it') || text.toLowerCase().includes('suicide');
     return NextResponse.json({
       sentiment: isCrisis ? 'negative' : 'neutral',
-      detectedSignals: [isCrisis ? 'distress' : 'reflection'],
+      detectedSignals: [isCrisis ? 'distress' : 'error'],
       reflection: isCrisis
         ? "It sounds like you're carrying a heavy burden. Please know you don't have to face this alone. Reach out to iCall (9152987821) or Vandrevala Foundation (9999666555) for immediate support."
-        : "I've processed your thoughts. You're navigating complex emotions — taking a moment to reflect is a brave step. I'm here whenever you need to talk.",
+        : `API Error occurred: ${error.message || "Unknown Error"}. Please check your terminal or OpenAI account.`,
       recommendations: isCrisis
         ? ["Call iCall: 9152987821 (Mon-Sat 8am-10pm)", "Call Vandrevala Foundation: 9999666555 (24/7)", "Reach out to a trusted person near you"]
-        : ["Take 5 slow, deep breaths right now", "Drink a glass of water", "Write one thing you're grateful for today"],
+        : ["Check your OpenAI configuration", "Check your terminal for exact logs"],
       severity: isCrisis ? 5 : 2,
       isCrisis,
-      reasoning: [isCrisis ? "Crisis language detected in text" : "Processing entry with fallback logic"],
+      reasoning: [isCrisis ? "Crisis language detected in text" : `Processing entry failed with error: ${error.message}`],
       patternInsights: [],
       wellnessGuidance: [],
     });
