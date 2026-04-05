@@ -50,3 +50,6 @@ next-env.d.ts
 
 # OS
 Thumbs.db
+
+# Documentation Generators
+generate_report.js
