@@ -1,24 +1,25 @@
 "use client";
 
+import { Moon, Leaf, MessageCircle } from "lucide-react";
 import styles from "./WellnessRecommendations.module.css";
 
 const RECOMMENDATIONS = [
   {
     title: "Digital Decompression",
     description: "You've been active late at night. Try setting a 'No Screen' boundary 30 mins before bed.",
-    icon: "🌙",
+    icon: Moon,
     tag: "Sleep"
   },
   {
     title: "Grounding Walk",
     description: "A 10-minute walk without music can help lower the cortisol spikes detected yesterday.",
-    icon: "🌳",
+    icon: Leaf,
     tag: "Stress"
   },
   {
     title: "Social Micro-Dose",
     description: "Send a quick 'thinking of you' text to one person. It helps break the isolation loop.",
-    icon: "💬",
+    icon: MessageCircle,
     tag: "Connection"
   }
 ];
@@ -31,7 +32,7 @@ export default function WellnessRecommendations() {
         {RECOMMENDATIONS.map((rec, i) => (
           <div key={i} className={`${styles.card} glass-card`}>
             <div className={styles.header}>
-              <span className={styles.icon}>{rec.icon}</span>
+              <span className={styles.icon}><rec.icon size={20} /></span>
               <span className={styles.tag}>{rec.tag}</span>
             </div>
             <h4 className={styles.recTitle}>{rec.title}</h4>

@@ -33,7 +33,7 @@ export function detectPatterns(memory: UserMemory): DetectedPattern[] {
       description: `Stress detected ${stressCount} times with average severity ${avgSev3.toFixed(1)}/5 over recent entries. ${sleepIssues > 0 ? 'Sleep disruption also noted.' : ''}`,
       confidence: burnoutConf,
       severity: avgSev3 >= 4 ? 'high' : 'moderate',
-      icon: '🔥',
+      icon: 'Flame',
     });
   }
 
@@ -47,7 +47,7 @@ export function detectPatterns(memory: UserMemory): DetectedPattern[] {
       description: `Anxiety-related signals detected ${anxietyCount} times across your entries.`,
       confidence: anxConf,
       severity: anxietyCount >= 4 ? 'high' : 'moderate',
-      icon: '😰',
+      icon: 'CloudRain',
     });
   }
 
@@ -61,7 +61,7 @@ export function detectPatterns(memory: UserMemory): DetectedPattern[] {
       description: `Feelings of loneliness or disconnection noted ${lonelyCount} times. ${negativeStreak >= 2 ? `Currently on a ${negativeStreak}-entry negative streak.` : ''}`,
       confidence: Math.min(85, 30 + lonelyCount * 20 + negativeStreak * 5),
       severity: lonelyCount >= 3 ? 'high' : 'moderate',
-      icon: '💙',
+      icon: 'Heart',
     });
   }
 
@@ -75,7 +75,7 @@ export function detectPatterns(memory: UserMemory): DetectedPattern[] {
       description: `Only ${recent5Positive} of last ${recent5.length} entries were positive. Average severity: ${recent5Severity.toFixed(1)}/5.`,
       confidence: Math.min(80, 40 + (5 - recent5Positive) * 10),
       severity: recent5Severity >= 4 ? 'high' : 'moderate',
-      icon: '📉',
+      icon: 'TrendingDown',
     });
   }
 
@@ -89,7 +89,7 @@ export function detectPatterns(memory: UserMemory): DetectedPattern[] {
       description: `${memory.lateNightCount} late-night entries (${(lateNightRatio * 100).toFixed(0)}% of total). ${sleepSignals > 0 ? `Sleep-related signals detected ${sleepSignals} times.` : ''}`,
       confidence: Math.min(85, 30 + memory.lateNightCount * 15 + sleepSignals * 10),
       severity: lateNightRatio >= 0.5 ? 'high' : 'moderate',
-      icon: '🌙',
+      icon: 'Moon',
     });
   }
 
@@ -107,7 +107,7 @@ export function detectPatterns(memory: UserMemory): DetectedPattern[] {
           description: `Your severity has improved from ${olderAvg.toFixed(1)} to ${newerAvg.toFixed(1)}. You're making progress!`,
           confidence: Math.min(80, 50 + Math.round((olderAvg - newerAvg) * 15)),
           severity: 'low',
-          icon: '🌱',
+          icon: 'Sprout',
         });
       }
     }

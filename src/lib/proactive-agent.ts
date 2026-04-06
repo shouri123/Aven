@@ -80,7 +80,7 @@ export function generateProactiveMessages(
     messages.push({
       id: 'growth_celebration',
       type: 'encouragement',
-      text: `${name}, Aven wants to celebrate something — your recent entries show real improvement compared to earlier. Whatever you've been doing differently, it's working. Keep going! 🌱`,
+      text: `${name}, Aven wants to celebrate something — your recent entries show real improvement compared to earlier. Whatever you've been doing differently, it's working. Keep going!` ,
       priority: 2,
     });
   }
