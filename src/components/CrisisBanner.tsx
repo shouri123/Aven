@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { AlertTriangle } from 'lucide-react';
 import styles from './CrisisBanner.module.css';
 
 export default function CrisisBanner() {
@@ -10,7 +11,7 @@ export default function CrisisBanner() {
     <div className={`${styles.banner} ${isExpanded ? styles.expanded : ''}`}>
       <div className={styles.container}>
         <div className={styles.mainInfo}>
-          <span className={styles.alertIcon}>🚨</span>
+          <span className={styles.alertIcon}><AlertTriangle size={20} /></span>
           <span className={styles.text}>Crisis Support Available:</span>
           <div className={styles.quickLinks}>
             <a href="tel:9152987821" className={styles.link}>iCall: 9152987821</a>

@@ -12,16 +12,15 @@ export interface WellnessTip {
 }
 
 export type WellnessCategory = 'sleep' | 'stress' | 'breathing' | 'mindfulness' | 'physical' | 'social' | 'nutrition' | 'professional';
-
 export const CATEGORY_META: Record<WellnessCategory, { label: string; color: string; icon: string }> = {
-  sleep: { label: 'Sleep Hygiene', color: '#6366f1', icon: '🌙' },
-  stress: { label: 'Stress Relief', color: '#f59e0b', icon: '🧘' },
-  breathing: { label: 'Breathing Exercises', color: '#10b981', icon: '🌬️' },
-  mindfulness: { label: 'Mindfulness', color: '#8b5cf6', icon: '🧠' },
-  physical: { label: 'Physical Wellness', color: '#ef4444', icon: '💪' },
-  social: { label: 'Social Connection', color: '#ec4899', icon: '💬' },
-  nutrition: { label: 'Nutrition & Hydration', color: '#14b8a6', icon: '🥗' },
-  professional: { label: 'Professional Help', color: '#64748b', icon: '🏥' },
+  sleep: { label: 'Sleep Hygiene', color: '#6366f1', icon: 'Moon' },
+  stress: { label: 'Stress Relief', color: '#f59e0b', icon: 'Wind' },
+  breathing: { label: 'Breathing Exercises', color: '#10b981', icon: 'Wind' },
+  mindfulness: { label: 'Mindfulness', color: '#8b5cf6', icon: 'Brain' },
+  physical: { label: 'Physical Wellness', color: '#ef4444', icon: 'Activity' },
+  social: { label: 'Social Connection', color: '#ec4899', icon: 'Users' },
+  nutrition: { label: 'Nutrition & Hydration', color: '#14b8a6', icon: 'Apple' },
+  professional: { label: 'Professional Help', color: '#64748b', icon: 'Hospital' },
 };
 
 export const WELLNESS_TIPS: WellnessTip[] = [
@@ -32,7 +31,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Try to go to bed and wake up at the same time every day, even on weekends. This helps regulate your body\'s internal clock and can improve sleep quality over time.',
     category: 'sleep',
     forSignals: ['sleep issues', 'insomnia', 'fatigue', 'tired', 'exhaustion'],
-    icon: '⏰',
+    icon: 'Clock',
   },
   {
     id: 'screen_before_bed',
@@ -40,7 +39,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Try to avoid screens for at least 30 minutes before sleeping. Blue light from devices can suppress melatonin production and make it harder to fall asleep.',
     category: 'sleep',
     forSignals: ['sleep issues', 'insomnia', 'anxiety'],
-    icon: '📱',
+    icon: 'Smartphone',
   },
   {
     id: 'sleep_environment',
@@ -48,7 +47,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Keep your bedroom cool (65-68°F / 18-20°C), dark, and quiet. Consider using blackout curtains or a white noise machine if needed.',
     category: 'sleep',
     forSignals: ['sleep issues', 'insomnia', 'fatigue'],
-    icon: '🛏️',
+    icon: 'Moon',
   },
 
   // STRESS
@@ -58,7 +57,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Tense each muscle group for 5 seconds, then release for 30 seconds. Start from your toes and work up to your head. This reduces physical tension associated with stress.',
     category: 'stress',
     forSignals: ['stress', 'anxiety', 'tension', 'overwhelm'],
-    icon: '🧘',
+    icon: 'Wind',
   },
   {
     id: 'time_blocking',
@@ -66,7 +65,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Break your day into focused 25-minute blocks (Pomodoro technique) with 5-minute breaks. This prevents feeling overwhelmed by making tasks manageable.',
     category: 'stress',
     forSignals: ['stress', 'overwhelm', 'burnout', 'productivity'],
-    icon: '📋',
+    icon: 'ClipboardList',
   },
   {
     id: 'journaling_practice',
@@ -74,7 +73,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Write for 15-20 minutes about your deepest feelings without editing. Research shows this can reduce stress hormones and improve immune function.',
     category: 'stress',
     forSignals: ['stress', 'anxiety', 'sadness', 'frustration'],
-    icon: '📝',
+    icon: 'PenLine',
   },
 
   // BREATHING
@@ -84,7 +83,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Breathe in for 4 seconds, hold for 7 seconds, exhale for 8 seconds. Repeat 4 times. This activates your parasympathetic nervous system, reducing anxiety.',
     category: 'breathing',
     forSignals: ['anxiety', 'panic', 'stress', 'nervousness', 'worry'],
-    icon: '🌬️',
+    icon: 'Wind',
   },
   {
     id: 'grounding_breath',
@@ -92,7 +91,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Name 5 things you see, 4 you can touch, 3 you hear, 2 you smell, 1 you taste. This grounds you in the present moment during anxiety or panic.',
     category: 'breathing',
     forSignals: ['anxiety', 'panic', 'dissociation', 'overwhelm'],
-    icon: '🌍',
+    icon: 'Globe',
   },
 
   // MINDFULNESS
@@ -102,7 +101,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Spend 10 minutes scanning attention from head to toe, noticing sensations without judgment. This builds self-awareness and reduces tension.',
     category: 'mindfulness',
     forSignals: ['anxiety', 'stress', 'tension', 'insomnia'],
-    icon: '🧘‍♀️',
+    icon: 'Activity',
   },
   {
     id: 'gratitude_practice',
@@ -110,7 +109,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Write down 3 specific things you\'re grateful for before bed. Research shows this rewires your brain toward positive thinking over time.',
     category: 'mindfulness',
     forSignals: ['sadness', 'depression', 'negativity', 'hopelessness'],
-    icon: '🙏',
+    icon: 'Heart',
   },
   {
     id: 'mindful_walking',
@@ -118,7 +117,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Take a 10-minute walk focusing on each step, the ground beneath you, and the air on your skin. This combines movement with mindfulness.',
     category: 'mindfulness',
     forSignals: ['stress', 'anxiety', 'depression', 'loneliness'],
-    icon: '🚶',
+    icon: 'Activity',
   },
 
   // PHYSICAL
@@ -128,7 +127,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Spend 5-10 minutes stretching when you wake up. Focus on neck, shoulders, back, and hips. Physical tension often mirrors emotional stress.',
     category: 'physical',
     forSignals: ['tension', 'fatigue', 'stress', 'burnout'],
-    icon: '🤸',
+    icon: 'Activity',
   },
   {
     id: 'regular_movement',
@@ -136,7 +135,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Even a 30-minute walk releases endorphins and serotonin. Exercise is one of the most evidence-based treatments for mild to moderate depression.',
     category: 'physical',
     forSignals: ['depression', 'sadness', 'fatigue', 'low energy', 'burnout'],
-    icon: '🏃',
+    icon: 'Activity',
   },
 
   // SOCIAL
@@ -146,7 +145,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Send a message to a friend or family member. Connection is a fundamental human need — even a short check-in can shift your mood.',
     category: 'social',
     forSignals: ['loneliness', 'isolation', 'disconnection', 'sadness'],
-    icon: '📞',
+    icon: 'Phone',
   },
   {
     id: 'community_activity',
@@ -154,7 +153,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Consider joining a class, club, or online community around an interest. Shared activities create natural connection without pressure.',
     category: 'social',
     forSignals: ['loneliness', 'isolation', 'boredom', 'disconnection'],
-    icon: '👥',
+    icon: 'Users',
   },
 
   // NUTRITION
@@ -164,7 +163,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Dehydration can worsen anxiety, fatigue, and mood. Aim for 8 glasses of water daily. Keep a water bottle visible as a reminder.',
     category: 'nutrition',
     forSignals: ['fatigue', 'headache', 'low energy', 'stress'],
-    icon: '💧',
+    icon: 'Droplets',
   },
   {
     id: 'mood_foods',
@@ -172,7 +171,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Foods rich in omega-3 (fish, walnuts), magnesium (leafy greens), and vitamin D (sunlight, eggs) support mental health. Avoid excess caffeine and sugar.',
     category: 'nutrition',
     forSignals: ['depression', 'fatigue', 'anxiety', 'mood swings'],
-    icon: '🥑',
+    icon: 'Apple',
   },
 
   // PROFESSIONAL
@@ -182,7 +181,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'If your symptoms persist for more than 2 weeks or significantly impact daily life, speaking with a mental health professional can make a real difference. This is a sign of strength, not weakness.',
     category: 'professional',
     forSignals: ['depression', 'anxiety', 'burnout', 'hopelessness', 'self-harm'],
-    icon: '🩺',
+    icon: 'Stethoscope',
   },
   {
     id: 'regular_checkup',
@@ -190,7 +189,7 @@ export const WELLNESS_TIPS: WellnessTip[] = [
     description: 'Mental and physical health are deeply connected. Thyroid issues, vitamin deficiencies, and hormonal changes can all affect mood. A routine checkup can rule out physical causes.',
     category: 'professional',
     forSignals: ['fatigue', 'mood swings', 'sleep issues', 'depression'],
-    icon: '🏥',
+    icon: 'Hospital',
   },
 ];
 
@@ -240,4 +239,4 @@ export function getRelevantTips(signals: string[], maxTips: number = 8): Wellnes
   return result;
 }
 
-export const MEDICAL_DISCLAIMER = `⚕️ **Important Disclaimer**: Aven provides general wellness guidance only. This is NOT a substitute for professional medical advice, diagnosis, or treatment. If symptoms persist or worsen, please consult a qualified healthcare professional. In case of emergency, contact your local emergency services immediately.`;
+export const MEDICAL_DISCLAIMER = `**Important Disclaimer**: Aven provides general wellness guidance only. This is NOT a substitute for professional medical advice, diagnosis, or treatment. If symptoms persist or worsen, please consult a qualified healthcare professional. In case of emergency, contact your local emergency services immediately.`;

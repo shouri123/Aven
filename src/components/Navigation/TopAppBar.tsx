@@ -14,7 +14,7 @@ const TopAppBar: React.FC<TopAppBarProps> = ({ onProfileClick }) => {
                 <div className="p-2 bg-gradient-to-tr from-tertiary to-primary rounded-xl group-hover:rotate-12 transition-transform duration-300 shadow-sm">
                     <span className="material-symbols-outlined text-white text-xl">potted_plant</span>
                 </div>
-                <span className="text-2xl font-bold tracking-tighter text-primary font-outfit">Aura.</span>
+                <span className="text-2xl font-bold tracking-tighter text-primary font-outfit">Aven.</span>
             </div>
             
             <div className="flex items-center gap-6">

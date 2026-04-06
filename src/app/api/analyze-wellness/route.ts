@@ -62,50 +62,48 @@ export async function POST(req: Request) {
       patternContext,
       openai
     );
+    console.log('Reasoning synthesis complete');
 
-    // 6. Response Agent
-    const finalResponseText = await generateResponse(
-      userName, 
-      text, 
-      reasoningData.conclusion, 
-      openai
-    );
+    // 6. Response Synthesis
+    const finalResponse = await generateResponse(text, userName, reasoningData.conclusion, openai);
+    console.log('Final Response generated');
 
-    // 7. Orchestrator Combine & Return
     return NextResponse.json({
       sentiment: emotionData.sentiment,
       detectedSignals: emotionData.signals,
-      reflection: finalResponseText,
+      reflection: finalResponse,
       recommendations: reasoningData.recommendations,
       severity: reasoningData.severity,
       isCrisis: false,
-      reasoning: [
-        `[Emotion Agent] Detected: ${emotionData.signals.join(', ')}`,
-        ...reasoningData.reasoningSteps,
-        `[Reasoning Agent] Conclusion: ${reasoningData.conclusion}`,
-        `[Response Agent] Generated empathy payload.`
-      ],
-      patternInsights: [],
+      reasoning: reasoningData.reasoningSteps,
       wellnessGuidance: [],
+      patternInsights: body.patternContext || []
     });
 
   } catch (error: any) {
     console.error('Orchestrator Pipeline Error:', error);
     const riskCheck = evaluateRisk(text);
+    
+    let errorMessage = "An unexpected error occurred.";
+    if (error.status === 401) {
+      errorMessage = "Invalid OpenAI API Key. Please update your .env.local file with a valid key.";
+    } else if (error.status === 429) {
+      errorMessage = "OpenAI Quota Exceeded or Rate Limited. Please check your billing/usage.";
+    } else if (error.message) {
+      errorMessage = `API Error: ${error.message}`;
+    }
+
     return NextResponse.json({
       sentiment: riskCheck.isCrisis ? 'negative' : 'neutral',
       detectedSignals: [riskCheck.isCrisis ? 'distress' : 'error'],
       reflection: riskCheck.isCrisis
         ? "Please know you don't have to face this alone. Reach out to iCall (9152987821) for immediate support."
-        : `API Error occurred: ${error.message || "Unknown Error"}. Please check your terminal or OpenAI account.`,
-      recommendations: riskCheck.isCrisis
-        ? ["Call iCall: 9152987821 (Mon-Sat 8am-10pm)", "Call Vandrevala Foundation: 9999666555 (24/7)"]
-        : ["Check your OpenAI configuration", "Check your terminal for exact logs"],
+        : errorMessage,
       severity: riskCheck.isCrisis ? 5 : 2,
       isCrisis: riskCheck.isCrisis,
-      reasoning: [riskCheck.isCrisis ? "Crisis language detected in text" : `Processing pipeline failed: ${error.message}`],
-      patternInsights: [],
+      reasoning: [riskCheck.isCrisis ? "Crisis protocol triggered" : "System: Error handled"],
       wellnessGuidance: [],
+      recommendations: ["Error encountered", "Please try again later"]
     });
   }
 }

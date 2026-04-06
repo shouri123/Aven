@@ -6,8 +6,24 @@ import {
   AlertTriangle, ShieldCheck, Phone, Headphones,
   LogOut, Sparkles, TrendingUp, Menu, X, Eye, EyeOff,
   CheckCircle2, ChevronDown, ChevronUp, Activity,
-  Heart, Moon, Flame, MessageCircle, Info, Clock
+  Heart, Moon, Flame, MessageCircle, Info, Clock,
+  CloudRain, TrendingDown, Smartphone, Bed, ClipboardList,
+  PenLine, Globe, Users, Droplets, Apple, Hospital
 } from 'lucide-react';
+
+const ICON_MAP: Record<string, React.ElementType> = {
+  Flame, CloudRain, Heart, TrendingDown, Moon, Sprout: Leaf,
+  Clock, Smartphone, Bed, Wind, ClipboardList, PenLine,
+  Globe, Activity, Phone, Users, Droplets, Apple,
+  Stethoscope: HeartPulse, Hospital, AlertTriangle, Info, ShieldCheck,
+  Brain, Sparkles, Send, Leaf, MessageCircle
+};
+
+const AvenIcon = ({ name, size = 18, className = "" }: { name: string, size?: number, className?: string }) => {
+  const Icon = ICON_MAP[name];
+  if (!Icon) return <span className="text-xs">✦</span>;
+  return <Icon size={size} className={className} />;
+};
 import { getMemory, saveMemory, initMemory, updateMemory, buildMemoryContext, type UserMemory } from '@/lib/memory-system';
 import { detectPatterns, buildPatternContext, type DetectedPattern } from '@/lib/pattern-detector';
 import { detectCrisis, CRISIS_RESOURCES, type CrisisResult } from '@/lib/crisis-detector';
@@ -170,6 +186,7 @@ function MainApp({ session, onLogout }: { session: Session; onLogout: () => void
   const [entries, setEntriesState] = useState<Entry[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
+  const [ToastIcon, setToastIcon] = useState<React.ElementType | null>(null);
   const [memory, setMemoryState] = useState<UserMemory | null>(null);
   const [patterns, setPatterns] = useState<DetectedPattern[]>([]);
   const [proactiveMessages, setProactive] = useState<ProactiveMessage[]>([]);
@@ -191,7 +208,11 @@ function MainApp({ session, onLogout }: { session: Session; onLogout: () => void
     }
   }, [memory]);
 
-  const showToast = (msg: string) => { setToast(msg); setTimeout(() => setToast(null), 3000); };
+  const showToast = (msg: string, Icon?: React.ElementType) => { 
+    setToast(msg); 
+    setToastIcon(Icon || null);
+    setTimeout(() => { setToast(null); setToastIcon(null); }, 3000); 
+  };
 
   const addEntry = (entry: Entry) => {
     const updated = [...entries, entry];
@@ -204,9 +225,9 @@ function MainApp({ session, onLogout }: { session: Session; onLogout: () => void
       setMemoryState(newMem);
     }
     const u = getUnlocks(updated.length);
-    if (updated.length === 3 && u.insights) showToast('🎉 Insights tab unlocked! Your AI is learning.');
-    if (updated.length === 5 && u.dashboard) showToast('📊 Dashboard unlocked! Patterns emerging.');
-    if (updated.length === 7 && u.medical) showToast('🏥 Medical insights unlocked!');
+    if (updated.length === 3 && u.insights) showToast('Insights tab unlocked! Your AI is learning.', TrendingUp);
+    if (updated.length === 5 && u.dashboard) showToast('Dashboard unlocked! Patterns emerging.', LayoutGrid);
+    if (updated.length === 7 && u.medical) showToast('Medical insights unlocked!', HeartPulse);
   };
 
   const handleNav = (id: string) => { setView(id); setSidebarOpen(false); };
@@ -258,7 +279,7 @@ function MainApp({ session, onLogout }: { session: Session; onLogout: () => void
           <p className="text-xs text-[#446a74]">{entries.length} entries analyzed</p>
           <div className="progress-track mt-2"><div className="progress-fill" style={{ width: `${Math.min((entries.length / 7) * 100, 100)}%` }} /></div>
           <p className="text-[9px] text-[#446a74]/60 mt-1">{entries.length >= 7 ? 'Fully calibrated' : `${7 - entries.length} more to full calibration`}</p>
-          {patterns.length > 0 && <div className="mt-2 flex flex-wrap gap-1">{patterns.slice(0, 2).map(p => <span key={p.id} className="text-[8px] bg-[#10b981]/10 text-[#10b981] px-1.5 py-0.5 rounded-full font-bold">{p.icon} {p.label}</span>)}</div>}
+          {patterns.length > 0 && <div className="mt-2 flex flex-wrap gap-1">{patterns.slice(0, 2).map(p => <span key={p.id} className="text-[8px] bg-[#10b981]/10 text-[#10b981] px-1.5 py-0.5 rounded-full font-bold flex items-center gap-1"><AvenIcon name={p.icon} size={8} /> {p.label}</span>)}</div>}
         </div>
         <div className="p-4 border-t border-[#10b981]/10">
           <div className="flex items-center gap-3">
@@ -275,7 +296,7 @@ function MainApp({ session, onLogout }: { session: Session; onLogout: () => void
         {view === 'medical' && (unlocks.medical ? <MedicalView memory={memory} /> : <LockedView label="Medical Insights" current={entries.length} required={7} />)}
         {view === 'profile' && <ProfileView session={session} entries={entries} memory={memory} patterns={patterns} />}
       </main>
-      {toast && <div className="fixed bottom-8 left-1/2 z-50 animate-toast flex items-center gap-3 bg-[#163526] text-white px-6 py-3 rounded-full shadow-2xl"><CheckCircle2 size={16} className="text-[#10b981]" /><span className="text-sm font-medium">{toast}</span></div>}
+      {toast && <div className="fixed bottom-8 left-1/2 z-50 animate-toast flex items-center gap-3 bg-[#163526] text-white px-6 py-3 rounded-full shadow-2xl">{ToastIcon ? <ToastIcon size={16} className="text-[#10b981]" /> : <CheckCircle2 size={16} className="text-[#10b981]" />}<span className="text-sm font-medium">{toast}</span></div>}
     </div>
   );
 }
@@ -289,12 +310,12 @@ function CrisisBanner({ crisis }: { crisis: CrisisResult }) {
       <div className="flex items-start gap-3">
         <div className={`p-2 rounded-xl ${isCritical ? 'bg-red-200' : 'bg-amber-200'}`}><AlertTriangle size={20} className={isCritical ? 'text-red-700' : 'text-amber-700'} /></div>
         <div className="flex-1">
-          <p className={`font-bold text-sm ${isCritical ? 'text-red-800' : 'text-amber-800'}`}>{isCritical ? '🚨 Crisis Support Available' : '⚠️ We\'re Here For You'}</p>
+          <p className={`font-bold text-sm ${isCritical ? 'text-red-800' : 'text-amber-800'}`}>{isCritical ? 'Crisis Support Available' : 'We\'re Here For You'}</p>
           <p className={`text-xs mt-1 ${isCritical ? 'text-red-700' : 'text-amber-700'}`}>{crisis.message}</p>
           {(crisis.level === 'critical' || crisis.level === 'alert') && (
             <div className="flex flex-wrap gap-2 mt-3">{CRISIS_RESOURCES.slice(0, 2).map(r => (
               <a key={r.name} href={`tel:${r.phone}`} className={`text-xs font-bold px-3 py-1.5 rounded-full ${isCritical ? 'bg-red-700 text-white' : 'bg-amber-700 text-white'}`}>
-                📞 {r.name}: {r.phone}
+                <Phone size={10} /> {r.name}: {r.phone}
               </a>
             ))}</div>
           )}
@@ -493,7 +514,7 @@ function InsightsView({ entries, patterns }: { entries: Entry[]; patterns: Detec
         <div className="flex flex-wrap gap-3 fade-up delay-100">
           {patterns.map(p => (
             <div key={p.id} className={`pattern-badge ${p.severity === 'high' ? 'pattern-high' : p.severity === 'moderate' ? 'pattern-moderate' : 'pattern-low'}`}>
-              <span className="text-lg">{p.icon}</span>
+              <AvenIcon name={p.icon} size={20} />
               <div>
                 <p className="text-sm font-bold">{p.label}</p>
                 <p className="text-[10px] opacity-70">{p.confidence}% confidence</p>
@@ -542,7 +563,7 @@ function InsightsView({ entries, patterns }: { entries: Entry[]; patterns: Detec
           <div className="space-y-4">{patterns.map(p => (
             <div key={p.id} className="p-4 rounded-2xl bg-white/50 border border-[#10b981]/10">
               <div className="flex items-center gap-3 mb-2">
-                <span className="text-2xl">{p.icon}</span>
+                <AvenIcon name={p.icon} size={24} />
                 <div className="flex-1"><p className="font-bold text-[#163526]">{p.label}</p><p className="text-[9px] uppercase tracking-widest text-[#446a74]">{p.severity} · {p.confidence}% confidence</p></div>
               </div>
               <p className="text-sm text-[#446a74]">{p.description}</p>
@@ -623,7 +644,7 @@ function DashboardView({ entries, memory, patterns }: { entries: Entry[]; memory
           <h3 className="text-lg font-semibold text-[#163526] mb-4">Active Patterns</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">{patterns.map(p => (
             <div key={p.id} className={`p-4 rounded-2xl border ${p.severity === 'high' ? 'border-red-200 bg-red-50/50' : p.severity === 'moderate' ? 'border-amber-200 bg-amber-50/50' : 'border-green-200 bg-green-50/50'}`}>
-              <div className="flex items-center gap-2 mb-2"><span className="text-xl">{p.icon}</span><p className="font-bold text-[#163526] text-sm">{p.label}</p></div>
+              <div className="flex items-center gap-2 mb-2"><AvenIcon name={p.icon} size={18} /><p className="font-bold text-[#163526] text-sm">{p.label}</p></div>
               <p className="text-xs text-[#446a74]">{p.description}</p>
               <div className="mt-2 progress-track"><div className="progress-fill" style={{ width: `${p.confidence}%` }} /></div>
               <p className="text-[9px] text-[#446a74] mt-1">{p.confidence}% confidence</p>
@@ -684,14 +705,14 @@ function MedicalView({ memory }: { memory: UserMemory | null }) {
         return (
           <div key={cat} className="glass-card rounded-3xl p-8 fade-up delay-200">
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-2xl">{meta.icon}</span>
+              <AvenIcon name={meta.icon} size={24} />
               <h3 className="text-lg font-semibold text-[#163526]">{meta.label}</h3>
             </div>
             <div className="space-y-3">
               {catTips.map(tip => (
                 <div key={tip.id} className="p-4 rounded-2xl bg-white/50 border border-[#10b981]/10 hover:shadow-md transition-all">
                   <div className="flex items-start gap-3">
-                    <span className="text-xl">{tip.icon}</span>
+                    <AvenIcon name={tip.icon} size={20} />
                     <div><p className="font-bold text-sm text-[#163526]">{tip.title}</p><p className="text-xs text-[#446a74] mt-1 leading-relaxed">{tip.description}</p></div>
                   </div>
                 </div>
